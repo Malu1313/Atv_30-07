@@ -7,10 +7,10 @@ const api = axios.create({
   },
 });
 const sheets = {
-    getUsers:()=>api.get("posts/"),
-    getTodos:() => api.get("todo/"),
-    getPosts:() => api.get("posts/1")
+    getUsers:()=>api.get("users"),
+    getTodos:() => api.get("todos/"),
+    getPosts:() => api.get("posts/")
  
 }
 
-export default api;
+export default sheets;

@@ -9,10 +9,28 @@ export default function Posts() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    api.get('/posts').then((res) => setPosts(res.data));
-
-    api.get('/users').then((res) => setUsers(res.data));
+    fetchUsers();
+    fetchPosts();
   }, []);
+
+  async function fetchUsers() {
+    try {
+      const response = await api.getUsers();
+      setUsers(response.data);
+    } catch (error) {
+      console.log("Erro ao buscar usuários", error);
+    }
+  }
+
+  async function fetchPosts() {
+    try {
+      const response = await api.getPosts();
+      setPosts(response.data);
+    } catch (error) {
+      console.log("Erro ao buscar posts", error);
+    }
+  }
+
 
   const getAuthorName = (userId) => {
     const user = users.find((u) => u.id === userId);

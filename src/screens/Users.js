@@ -8,8 +8,17 @@ export default function Users() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    api.get('/users').then((res) => setUsers(res.data));
+   fetchUsers();
   }, []);
+  
+  async function fetchUsers() {
+    try {
+      const response = await api.getUsers();
+      setUsers(response.data);
+    } catch (error) {
+      console.log("Erro ao buscar usuários", error);
+    }
+  }
 
   return (
     <View style={styles.container}>

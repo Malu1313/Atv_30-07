@@ -10,9 +10,31 @@ const Todos = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    api.get('/todos').then(response => setTodos(response.data));
-    api.get('/users').then(response => setUsers(response.data));
+    fetchUsers();
+    fetchTodos();
   }, []);
+
+  async function fetchUsers() {
+    try {
+      const response = await api.getUsers();
+      setUsers(response.data);
+    } catch (error) {
+      console.log("Erro ao buscar usuários", error);
+    }
+  }
+
+  async function fetchTodos() {
+    try {
+      const response = await api.getTodos();
+      const todosWithLocalState = response.data.map((todo) => ({
+        ...todo,
+        completedLocal: todo.completed,
+      }));
+      setTodos(todosWithLocalState);
+    } catch (error) {
+      console.log("Erro ao buscar tarefas", error);
+    }
+  }
 
   const handleToggle = (id) => {
     setTodos(prevTodos =>
