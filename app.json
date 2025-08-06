@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "b7cc35e3-3786-48d7-8bf5-ce6feaf8ba66"
+      }
+    },
+    "android": {
+      "package": "com.malu1313.atv_3007"
+    }
+  }
+}
